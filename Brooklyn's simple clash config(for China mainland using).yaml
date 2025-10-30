@@ -31,7 +31,7 @@ latencytest: &cloudflare {enable: true, url: http://cp.cloudflare.com/generate_2
 proxy-providers:
   Server:
     type: http
-    url: https://api.sublink.dev/sub?target=clash&url=http%3A%2F%2Fairport.brooklynchristopherh.xyz%2Fs%2F2d25788098ce33820e9470a8c615581a&insert=false
+    url: 
     path: ./nodelist/Nexitally.yaml
     interval: 86400
     health-check: *cloudflare
