@@ -1,0 +1,364 @@
+mixed-port: 7890
+allow-lan: false
+mode: rule
+log-level: info
+ipv6: false
+external-controller: 127.0.0.1:9090
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  default-nameserver:
+    - 223.5.5.5
+    - 1.0.0.1
+  fake-ip-filter:
+    - '*.lan'
+    - 'localhost.ptlogin2.qq.com'
+    - dns.msftncsi.com
+    - "*.srv.nintendo.net"
+    - "*.stun.playstation.net"
+    - xbox.*.microsoft.com
+    - "*.xboxlive.com"
+    
+  nameserver:
+    - https://hk.pro.xns.one/@zhiqiang/brooklyn-ipad/dns-query
+    - https://vxcdn.novaxns.one/@zhiqiang/brooklyn-ipad/dns-query
+    
+
+   
+   
+
+proxies:
+  
+ 
+
+latencytest: &cloudflare {enable: true, url: http://cp.cloudflare.com/generate_204, interval: 600}
+proxy-providers:
+  Nexitally:
+    type: http
+    url: https://cdn.primehelix.co/?L2Rvd25sb2FkQ29uZmlnL0NsYXNoLmFzcHg/dD10cm9qYW4mZXE9d2luZG93cyZ1cms9OTY0MTg2MTMtNTk5ZC00MGNjLTk2ZTktYTIyZjdlYjE2NmJhJm1tPTI0OTgxMSZrdG1tPUdjdmFYMTVDRGttckNuN1UlMmZ5blBiZyUzZCUzZCY=
+    path: ./nodelist/Nexitally.yaml
+    interval: 86400
+    health-check: *cloudflare
+    # filter: ^((?!Premium).)*$ # Meta only
+
+  TAG:
+    type: http
+    url: https://ratchada.terminal69.win/api/v1/trails/bolster?token=a39dfa10a61da6801163ea6a2eb75736
+    path: ./nodelist/TAG.yaml
+    interval: 86400
+    health-check: *cloudflare
+        
+
+  Server:
+    type: http
+    url: http://airport.brooklynchristopherh.xyz/s/0ed21b48926e8b4bc02b304ac052ab5e
+    path: ./nodelist/Server.yaml
+    interval: 86400
+    health-check: *cloudflare
+    
+  G94:
+    type: http
+    url: https://www.g94cloud.com/api/subscription/users/get_subscription?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX3V1aWQiOiI0YjQ3NmRkNS0xN2QzLTQwNTctOWQzNy05NzJkYTQ4ZmM0MDYiLCJ1c2VyX2xhc3RfcHJveHlfY29uZmlnX3Jlc2V0IjoiMjAyNS0wOC0wOSAxMTozODo1OSJ9.TvcOgQVg2dXyAV-pLPbaHc5F8CAReziUBHF2Rtn6kMY
+    path: ./nodelist/Server.yaml
+    interval: 86400
+    health-check: *cloudflare
+
+
+
+
+type:
+  fallback: &fallback {type: fallback, interval: 600, url: http://cp.cloudflare.com/generate_204}
+  urltest: &urltest {type: url-test, interval: 600, url: http://cp.cloudflare.com/generate_204}
+proxy-groups:
+  - name: Proxy
+    type: select
+    proxies: [Nexitally, TAG, Server, G94, 🇭🇰 Hong Kong, 🇺🇲 United States, 🇸🇬 Singapore, 🇯🇵 Japan, 🇹🇼 Taiwan, DIRECT]
+    
+  
+  - name: Nexitally
+    type: select
+    proxies: 
+    use: [Nexitally]
+ 
+    
+  - name: TAG
+    type: select
+    proxies:
+    use: [TAG]
+
+  - name: Server
+    type: select
+    proxies:
+    use: [Server]
+    
+  - name: G94
+    type: select
+    proxies:
+    use: [G94]
+
+
+
+
+
+
+
+    
+  - name: YouTube
+    type: select
+    proxies: [🇭🇰 Hong Kong, 🇺🇲 United States, 🇸🇬 Singapore, 🇯🇵 Japan, 🇹🇼 Taiwan,Proxy,DIRECT]
+
+  - name: OpenAI
+    type: select
+    proxies: [🇭🇰 Hong Kong, 🇺🇲 United States, 🇸🇬 Singapore, 🇯🇵 Japan, 🇹🇼 Taiwan,Proxy,DIRECT]
+
+  - name: Apple
+    type: select
+    proxies: [🇭🇰 Hong Kong, 🇺🇲 United States, 🇸🇬 Singapore, 🇯🇵 Japan, 🇹🇼 Taiwan,Proxy,DIRECT]
+    
+  - name: Google
+    type: select
+    proxies: [🇭🇰 Hong Kong, 🇺🇲 United States, 🇸🇬 Singapore, 🇯🇵 Japan, 🇹🇼 Taiwan,Proxy,DIRECT]
+    
+  - name: Netflix
+    type: select
+    proxies: [🇭🇰 Hong Kong, 🇺🇲 United States, 🇸🇬 Singapore, 🇯🇵 Japan, 🇹🇼 Taiwan,Proxy,DIRECT]
+    
+  - name: Disney
+    type: select
+    proxies: [🇭🇰 Hong Kong, 🇺🇲 United States, 🇸🇬 Singapore, 🇯🇵 Japan, 🇹🇼 Taiwan,Proxy,DIRECT]
+    
+  - name: Steam
+    type: select
+    proxies: [🇭🇰 Hong Kong, 🇺🇲 United States, 🇸🇬 Singapore, 🇯🇵 Japan, 🇹🇼 Taiwan,Proxy,DIRECT]
+    
+  - name: Telegram
+    type: select
+    proxies: [🇭🇰 Hong Kong, 🇺🇲 United States, 🇸🇬 Singapore, 🇯🇵 Japan, 🇹🇼 Taiwan,Proxy,DIRECT]
+    
+  - name: Speedtest
+    type: select
+    proxies: [🇭🇰 Hong Kong, 🇺🇲 United States, 🇸🇬 Singapore, 🇯🇵 Japan, 🇹🇼 Taiwan,Proxy,DIRECT]
+    
+  - name: Paypal
+    type: select
+    use: [TAG]
+    filter: 英国|美国
+    proxies: [DIRECT]
+    
+  - name: eBay
+    type: select
+    use: [TAG]
+    filter: 美国
+    
+    
+  - name: 🇭🇰 Hong Kong
+    type: select
+    use: [Nexitally, TAG]
+    filter: Hong Kong|HK|香港|🇭🇰
+   
+  - name: 🇺🇲 United States
+    type: select
+    use: [Nexitally, TAG]
+    filter: United States|US|美国|🇺🇲
+    
+  - name: 🇸🇬 Singapore
+    type: select
+    use: [Nexitally, TAG]
+    filter: Singapore|SG|新加坡|🇸🇬
+   
+  - name: 🇯🇵 Japan
+    type: select
+    use: [Nexitally, TAG]
+    filter: Japan|JP|日本|🇯🇵
+    
+  - name: 🇹🇼 Taiwan
+    type: select
+    use: [Nexitally, TAG]
+    filter: Taiwan|TW|台湾|🇹🇼
+    
+    
+
+rules:
+  - RULE-SET,applications,DIRECT
+  - DOMAIN,clash.razord.top,DIRECT
+  - DOMAIN,weex.com,DIRECT
+  - DOMAIN,chatgpt.com,OpenAI
+  - DOMAIN,bitget.com,DIRECT
+  - DOMAIN,yacd.haishan.me,DIRECT
+  - DOMAIN,connectivitycheck.gstatic.com,Proxy
+  - DOMAIN-KEYWORD,tubi,🇺🇲 United States
+  
+  
+  - RULE-SET,private,DIRECT
+  - RULE-SET,reject,REJECT
+  - RULE-SET,BlockHttpDNS,REJECT
+  - DOMAIN-SUFFIX,sentry.io,REJECT
+  - RULE-SET,DMM,🇯🇵 Japan
+  - RULE-SET,Niconico,🇯🇵 Japan
+  - RULE-SET,YouTube,YouTube
+  - RULE-SET,WeChat,DIRECT
+  - RULE-SET,Google,Google
+  - RULE-SET,OpenAI,OpenAI
+  - RULE-SET,Speedtest,Speedtest
+  - RULE-SET,Netflix,Netflix
+  - RULE-SET,Disney,Disney
+  - RULE-SET,Steam,Steam
+  - RULE-SET,Telegram,Telegram
+  - RULE-SET,Paypal,Paypal
+  - RULE-SET,eBay,eBay
+
+  - RULE-SET,icloud,Apple
+  - RULE-SET,apple,Apple
+  - RULE-SET,proxy,Proxy
+  - RULE-SET,direct,DIRECT
+  - RULE-SET,cncidr,DIRECT
+  - RULE-SET,lancidr,DIRECT
+  - IP-CIDR,2.2.2.2/32,DIRECT
+  - DOMAIN,www.189.cn,DIRECT
+  - DOMAIN,www.spankbang.com,Proxy
+  - MATCH,Proxy
+
+classical: &classical {type: http, behavior: classical, interval: 86400}
+domain: &domain {type: http, behavior: domain, interval: 86400}
+ipcidr: &ipcidr {type: http, behavior: ipcidr, interval: 86400}
+rule-providers:
+  Mail:
+    <<: *classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Mail/Mail_No_Resolve.yaml
+    path: ./ruleset/Mail.yaml
+  BlockHttpDNS:
+    <<: *classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BlockHttpDNS/BlockHttpDNS_No_Resolve.yaml
+    path: ./ruleset/BlockHttpDNS.yaml
+  Niconico:
+    <<: *classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Niconico/Niconico_No_Resolve.yaml
+    path: ./ruleset/Niconico.yaml
+  DMM:
+    <<: *classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/DMM/DMM_No_Resolve.yaml
+    path: ./ruleset/DMM.yaml
+  YouTube:
+    <<: *classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube_No_Resolve.yaml
+    path: ./ruleset/YouTube.yaml
+  GameDownload:
+    <<: *classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Game/GameDownload/GameDownload_No_Resolve.yaml
+    path: ./ruleset/GameDownload.yaml
+  WeChat:
+    <<: *classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/WeChat/WeChat_No_Resolve.yaml
+    path: ./ruleset/WeChat.yaml
+  Riot:
+    <<: *classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Riot/Riot_No_Resolve.yaml
+    path: ./ruleset/Riot.yaml
+  Google:
+    <<: *classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google_No_Resolve.yaml
+    path: ./ruleset/Google.yaml
+  OpenAI:
+    <<: *classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI_No_Resolve.yaml
+    path: ./ruleset/OpenAI.yaml
+    
+  Netflix:
+    <<: *classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix_No_Resolve.yaml
+    path: ./ruleset/Netflix.yaml
+    
+  Disney:
+    <<: *classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Disney/Disney_No_Resolve.yaml
+    path: ./ruleset/Disney.yaml
+  Speedtest:
+    <<: *classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Speedtest/Speedtest_No_Resolve.yaml
+    path: ./ruleset/Speedtest.yaml
+    
+  Telegram:
+    <<: *classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram_No_Resolve.yaml
+    path: ./ruleset/Telegram.yaml
+ 
+  Gooogle:
+    <<: *classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google_No_Resolve.yaml
+    path: ./ruleset/Google.yaml
+    
+  Steam:
+    <<: *classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Steam/Steam_No_Resolve.yaml
+    path: ./ruleset/Steam.yaml
+    
+  Paypal:
+    <<: *classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Paypal/Paypal_No_Resolve.yaml
+    path: ./ruleset/Paypal.yaml
+    
+  eBay:
+    <<: *classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/eBay/eBay_No_Resolve.yaml
+    path: ./ruleset/eBay.yaml
+    
+  HBO:
+    <<: *classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/HBO/HBO_No_Resolve.yaml
+    path: ./ruleset/HBO.yaml
+    
+  Instagram:
+    <<: *classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Instagram/Instagram_No_Resolve.yaml
+    path: ./ruleset/Instagram.yaml
+    
+  OKX:
+    <<: *classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OKX/OKX_No_Resolve.yaml
+    path: ./ruleset/OKX.yaml
+
+    
+    
+    
+    
+  icloud:
+    <<: *domain
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/icloud.txt
+    path: ./ruleset/icloud.yaml
+  apple:
+    <<: *domain
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/apple.txt
+    path: ./ruleset/apple.yaml
+  reject:
+    <<: *domain
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt
+    path: ./ruleset/reject.yaml
+  proxy:
+    <<: *domain
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/proxy.txt
+    path: ./ruleset/proxy.yaml
+  direct:
+    <<: *domain
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/direct.txt
+    path: ./ruleset/direct.yaml
+  private:
+    <<: *domain
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/private.txt
+    path: ./ruleset/private.yaml
+  telegramcidr:
+    <<: *ipcidr
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/telegramcidr.txt
+    path: ./ruleset/telegramcidr.yaml
+  cncidr:
+    <<: *ipcidr
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/cncidr.txt
+    path: ./ruleset/cncidr.yaml
+  lancidr:
+    <<: *ipcidr
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/lancidr.txt
+    path: ./ruleset/lancidr.yaml
+  applications:
+    <<: *classical
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/applications.txt
+    path: ./ruleset/applications.yaml
