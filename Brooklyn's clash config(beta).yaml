@@ -20,12 +20,6 @@ dns:
     - xbox.*.microsoft.com
     - "*.xboxlive.com"
     
-  nameserver:
-    - https://hk.pro.xns.one/@zhiqiang/brooklyn-ipad/dns-query
-    - https://vxcdn.novaxns.one/@zhiqiang/brooklyn-ipad/dns-query
-    
-
-   
    
 
 proxies:
@@ -36,7 +30,7 @@ latencytest: &cloudflare {enable: true, url: http://cp.cloudflare.com/generate_2
 proxy-providers:
   Nexitally:
     type: http
-    url: https://cdn.primehelix.co/?L2Rvd25sb2FkQ29uZmlnL0NsYXNoLmFzcHg/dD10cm9qYW4mZXE9d2luZG93cyZ1cms9OTY0MTg2MTMtNTk5ZC00MGNjLTk2ZTktYTIyZjdlYjE2NmJhJm1tPTI0OTgxMSZrdG1tPUdjdmFYMTVDRGttckNuN1UlMmZ5blBiZyUzZCUzZCY=
+    url: 
     path: ./nodelist/Nexitally.yaml
     interval: 86400
     health-check: *cloudflare
@@ -44,28 +38,13 @@ proxy-providers:
 
   TAG:
     type: http
-    url: https://ratchada.terminal69.win/api/v1/trails/bolster?token=a39dfa10a61da6801163ea6a2eb75736
+    url: 
     path: ./nodelist/TAG.yaml
     interval: 86400
     health-check: *cloudflare
         
 
-  Server:
-    type: http
-    url: http://airport.brooklynchristopherh.xyz/s/0ed21b48926e8b4bc02b304ac052ab5e
-    path: ./nodelist/Server.yaml
-    interval: 86400
-    health-check: *cloudflare
-    
-  G94:
-    type: http
-    url: https://www.g94cloud.com/api/subscription/users/get_subscription?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX3V1aWQiOiI0YjQ3NmRkNS0xN2QzLTQwNTctOWQzNy05NzJkYTQ4ZmM0MDYiLCJ1c2VyX2xhc3RfcHJveHlfY29uZmlnX3Jlc2V0IjoiMjAyNS0wOC0wOSAxMTozODo1OSJ9.TvcOgQVg2dXyAV-pLPbaHc5F8CAReziUBHF2Rtn6kMY
-    path: ./nodelist/Server.yaml
-    interval: 86400
-    health-check: *cloudflare
-
-
-
+  
 
 type:
   fallback: &fallback {type: fallback, interval: 600, url: http://cp.cloudflare.com/generate_204}
@@ -87,23 +66,7 @@ proxy-groups:
     proxies:
     use: [TAG]
 
-  - name: Server
-    type: select
-    proxies:
-    use: [Server]
-    
-  - name: G94
-    type: select
-    proxies:
-    use: [G94]
-
-
-
-
-
-
-
-    
+     
   - name: YouTube
     type: select
     proxies: [🇭🇰 Hong Kong, 🇺🇲 United States, 🇸🇬 Singapore, 🇯🇵 Japan, 🇹🇼 Taiwan,Proxy,DIRECT]
